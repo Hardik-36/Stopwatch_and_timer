@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="path/to/your/css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: linear-gradient(135deg, #204051, #3b6978);
+            color: #FFFFFF;
+        }
+
+        .navbar {
+            width: 100vw;
+            height: 20vh;
+            position: absolute;
+            background-color: #5c8d31;
+        }
+
+        .alarm {
+            width: 8vw;
+            height: 8vh;
+            position: absolute;
+            margin-left: 80vw;
+            margin-top: 6vh;
+            font-size: 1.3vw;
+            border-radius: 1vw;
+        }
+
+        .timer {
+            width: 8vw;
+            height: 8vh;
+            position: absolute;
+            margin-left: 60vw;
+            margin-top: 6vh;
+            font-size: 1.3vw;
+            border-radius: 1vw;
+        }
+
+        .stopwatch {
+            width: 8vw;
+            height: 8vh;
+            position: absolute;
+            margin-left: 40vw;
+            margin-top: 6vh;
+            font-size: 1.3vw;
+            border-radius: 1vw;
+        }
+
+        .stopwatch:hover {
+            background-color: #0b4a0a;
+        }
+
+        .timerbox {
+            position: absolute;
+            top: 30vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40vw;
+            height: 58vh;
+            background-color: #5c8d31;
+            border-radius: 1vw;
+            padding: 2rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+        }
+
+
+        .settimer {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #FFFFFF;
+            letter-spacing: 0.2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .settimer span {
+            display: inline-block;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        a {
+            color: white;
+        }
+
+        .specifiedtimer {
+            width: 40vw;
+            height: 32vh;
+            margin-top: 100vh;
+            background-color: #315c8d;
+            margin-left: 15vh;
+            padding: 2vh;
+            border-radius: 1.60vw;
+            position: absolute;
+        }
+
+        .empty {
+            margin-top: 200vh;
+            height: 45vh;
+        }
+
+
+        .onemin {
+            margin-top: 2vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .tenmin {
+            margin-top: 16vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fivemin {
+            margin-top: 09vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fifteenmin {
+            margin-top: 23vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .second {
+            width: 15vw;
+            margin-left: 1vw;
+            position: absolute;
+            padding: 2vh;
+        }
+
+        .hour {
+            margin-left: 28vw;
+            position: absolute;
+            width: 15vw;
+            padding: 2vh;
+        }
+
+        .minute {
+            margin-left: 15vw;
+            position: absolute;
+            width: 15vw;
+            padding: 2vh;
+        }
+
+        .onesecond {
+            margin-top: 2vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .tensecond {
+            margin-top: 16vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fivesecond {
+            margin-top: 09vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fifteensecond {
+            margin-top: 23vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .onehour {
+            margin-top: 2vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .tenhour {
+            margin-top: 16vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fivehour {
+            margin-top: 09vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .fifteenhour {
+            margin-top: 23vh;
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .specifiedtimer,
+        .holidays {
+            display: inline-block;
+
+            transition: transform 0.3s ease;
+        }
+
+        .holidays {
+            width: 40vw;
+            height: 140vh;
+            background-color: #315c8d;
+            padding: 2vh;
+            border-radius: 1.6vw;
+            position: absolute;
+            left: 1vw;
+            margin-top: 100vh;
+            margin-left: 50vw;
+        }
+
+        .minute a:hover {
+            font-weight: bold;
+        }
+
+        .second a:hover {
+            font-weight: bold;
+        }
+
+        .hour a:hover {
+            font-weight: bold;
+        }
+
+        .holidays a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            margin-bottom: 1rem;
+            margin-top: 1vh;
+            padding-left: 2vw;
+        }
+
+        .holidays a:hover {
+            font-weight: bold;
+        }
+
+        .holidays td {
+            padding-left: 2vw;
+            color: black;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hours {
+            position: absolute;
+            font-size: 1.5vw;
+            color: black;
+            margin-right: 4vw;
+            margin-top: 8vh;
+        }
+
+        .minutes {
+            position: absolute;
+            font-size: 1.5vw;
+            color: black;
+            margin-right: 10vw;
+            margin-top: 2vh;
+        }
+
+        .seconds {
+            position: absolute;
+            font-size: 1.5vw;
+            color: black;
+            margin-right: 10vw;
+            margin-top: 12.5vh;
+        }
+
+        .modal {
+
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            width: 55vw;
+            height: 50vh;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 2vw;
+            border-radius: 1vw;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .minutes {
+            position: absolute;
+            font-size: 1.5vw;
+        }
+
+        .startbutton {
+            width: 8vw;
+            margin-top: 38vh;
+            position: absolute;
+            height: 4vh;
+            margin-right: 40vw;
+        }
+
+        .cancelbutton {
+            width: 8vw;
+            margin-top: 38vh;
+            position: absolute;
+            height: 4vh;
+            margin-left: 28vw
+        }
+
+        .link {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .clock {
+            background: transparent;
+            border: 0.5vw solid black;
+            border-radius: 50%;
+            width: 6vw;
+            height: 12vh;
+            margin-top: 3vh;
+            position: absolute;
+            margin-left: 3vw;
+        }
+
+        .hourhand {
+            background: transparent;
+            border: 0.3vw solid black;
+            color: transparent;
+            border-top: 0;
+            border-left: 0;
+            border-bottom: 0;
+            height: 7vh;
+            position: absolute;
+            margin-left: 2.6vw;
+        }
+
+        .minhand {
+            background: transparent;
+            border: 0.3vw solid black;
+            color: transparent;
+            border-top: 0;
+            border-left: 0;
+            border-right: 0;
+            width: 3.9vw;
+            position: absolute;
+            margin-top: 3.6vh;
+            margin-left: 2.6vw;
+        }
+
+
+        .settimertext {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #2b6b31;
+            background-color: #FFFFFF;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            margin-left: 0.5vw;
+            margin-top: 2rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .settimertext:hover {
+            background-color: #f0f0f0;
+        }
+
+        #hours {
+            margin-top: 10.5vh;
+            position: absolute;
+            margin-left: 14.2vw;
+            width: 5vw;
+            height: 5vh;
+            font-size: 1.5vw;
+            text-align: center;
+            border: 1px solid #2b6b31;
+            border-radius: 0.5vw;
+            background-color: #f2f2f2;
+        }
+
+        #minutes {
+            margin-top: 21vh;
+            position: absolute;
+            margin-left: 14.2vw;
+            width: 5vw;
+            height: 5vh;
+            font-size: 1.5vw;
+            text-align: center;
+            border: 1px solid #2b6b31;
+            border-radius: 0.5vw;
+            background-color: #f2f2f2;
+        }
+
+        #seconds {
+            margin-top: 32vh;
+            position: absolute;
+            margin-left: 14.2vw;
+            width: 5vw;
+            height: 5vh;
+            font-size: 1.5vw;
+            text-align: center;
+            border: 1px solid #2b6b31;
+            border-radius: 0.5vw;
+            background-color: #f2f2f2;
+        }
+
+        .hours {
+            position: absolute;
+            margin-left: 8vw;
+            margin-top: 12vh;
+            font-size: 1.5vw;
+            color: #2b6b31;
+        }
+
+        .minutes {
+            position: absolute;
+            margin-left: 8vw;
+            margin-top: 23vh;
+            font-size: 1.5vw;
+            color: #2b6b31;
+        }
+
+        .seconds {
+            position: absolute;
+            margin-left: 8vw;
+            margin-top: 33vh;
+            font-size: 1.5vw;
+            color: #2b6b31;
+        }
+
+        #reset {
+            color: #0c3c0b;
+            background-color: #f2f2f2;
+            margin-top: 2rem;
+            margin-left: 0.5vw;
+        }
+
+        .settimer span {
+            display: inline-block;
+            animation: pulse 1s infinite alternate;
+        }
+
+        settimertext,
+        #stop,
+        #reset {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 0.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            border: none;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .settimertext {
+            color: #2b6b31;
+            background-color: #FFFFFF;
+        }
+
+        .settimertext:hover {
+            background-color: #f0f0f0;
+        }
+
+        #reset:hover {
+            background-color: #f0f0f0;
+        }
+
+        #stop {
+            color: #0b4a0a;
+            background-color: #fafafa;
+            margin-top: 4vh;
+            margin-left: 0.5vw;
+        }
+
+        #stop:hover {
+            background-color: #f0f0f0;
+        }
+
+        .Title {
+            position: absolute;
+            margin-left: 8.5vw;
+            color: black;
+            font-size: 1.6vw;
+            margin-top: 2vh;
+        }
+
+        #title {
+            position: absolute;
+            margin-left: 14vw;
+            color: black;
+            font-size: 1.3vw;
+            margin-top: 2vh;
+            justify-content: center;
+        }
+
+        .startbutton {
+            position: absolute;
+            width: 10vw;
+            height: 6vh;
+            margin-right: 48vw;
+            margin-top: 43vh;
+
+        }
+
+        label {
+            display: block;
+            text-align: center;
+        }
+
+        input::placeholder {
+            text-align: center;
+        }
+
+        .cancelbutton {
+            position: absolute;
+
+            width: 10vw;
+            height: 6vh;
+
+
+            margin-left: 45vw;
+            margin-top: 43vh;
+
+        }
+
+        .link {
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            margin-top: 2vh;
+            margin-right: 50vw;
+            text-decoration: none;
+            color: black;
+            position: absolute;
+        }
+
+        .stopwatchlink {
+            text-decoration: none;
+        }
+
+        .alarm:hover {
+            background-color: #4b7426;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .stop:hover {
+            background-color: #4b7426;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .timer:hover {
+            background-color: #4b7426;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .link:hover {
+            color: white;
+            position: absolute;
+        }
+
+        .holidays td {
+            color: white;
+        }
+
+        .holidays td a {
+            color: white;
+        }
+
+        .loader-overlay {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+        }
+
+        .loader-content {
+            color: white;
+            font-size: 2vw;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="clock">
+            <p class="hourhand">|</p>
+            <p class="minhand">_</p>
+        </div>
+        <button class="alarm">
+            <a href="alarm.html" class="stopwatchlink"><span class="link">Alarm</span>
+            </a>
+        </button>
+        <button class="timer">
+            <a href="timer.html" class="stopwatchlink"><span class="link">Timer</span>
+            </a>
+
+        </button>
+        <button class="stopwatch"><a href="stopwatch.html" class="stopwatchlink"><span class="link">Stop Watch</span>
+            </a>
+
+        </button>
+        <div class="timerbox">
+            <p class="settimer">00:00:00</p>
+            <button class="settimertext">Set Timer</button>
+            <button class="stop-button" id="stop">Stop</button>
+            <button class="reset-button" id="reset">Reset</button>
+        </div>
+        <div class="specifiedtimer">
+            <div class="minute">
+                <a href="#">
+                    <p class="onemin" id="onemin">1 Minute Timer</p>
+                </a>
+                <a href="#">
+                    <p class="tenmin" id="tenmin"> 10 Minute Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fivemin" id="fivemin">5 Minute Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fifteenmin" id="fifteenmin">15 Minute Timer</p>
+                </a>
+            </div>
+            <div class="second">
+                <a href="#">
+                    <p class="onesecond" id="onesecond">1 Second Timer</p>
+                </a>
+                <a href="#">
+                    <p class="tensecond" id="tensecond"> 10 Seconds Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fivesecond" id="fivesecond">5 Seconds Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fifteensecond" id="fifteensecond">15 Seconds Timer</p>
+                </a>
+            </div>
+            <div class="hour">
+                <a href="#">
+                    <p class="onehour" id="onehour">1 Hour Timer</p>
+                </a>
+                <a href="#">
+                    <p class="tenhour" id="tenhour"> 10 Hours Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fivehour" id="fivehour">5 Hours Timer</p>
+                </a>
+                <a href="#">
+                    <p class="fifteenhour" id="fifteenhour">15 Hours Timer</p>
+                </a>
+            </div>
+
+        </div>
+        <div class="holidays">
+            <table class="center table-lr">
+                <tbody>
+                    <tr>
+                        <td class="td"><a href="/timer/new-years-day/">New Year</a></td>
+                        <td class="td">Jan 1, 2024</td>
+                        <td class="td">168 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/martin-luther-king-day/">Martin Luther King Day</a></td>
+                        <td class="td">Jan 15, 2024</td>
+                        <td class="td">182 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/groundhog-day/">Groundhog Day</a></td>
+                        <td class="td">Feb 2, 2024</td>
+                        <td class="td">200 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/chinese-new-year/">Chinese New Year</a></td>
+                        <td class="td">Feb 10, 2024</td>
+                        <td class="td">208 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/valentines-day/">Valentine's Day</a></td>
+                        <td class="td">Feb 14, 2024</td>
+                        <td class="td">212 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/presidents-day/">Presidents Day</a></td>
+                        <td class="td">Feb 19, 2024</td>
+                        <td class="td">217 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/st-patricks-day/">St. Patrick's Day</a></td>
+                        <td class="td">Mar 17, 2024</td>
+                        <td class="td">244 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/good-friday/">Good Friday</a></td>
+                        <td class="td">Mar 29, 2024</td>
+                        <td class="td">256 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/easter/">Easter</a></td>
+                        <td class="td">Mar 31, 2024</td>
+                        <td class="td">258 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/tax-day/">Tax Day</a></td>
+                        <td class="td">Apr 15, 2024</td>
+                        <td class="td">273 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/mothers-day/">Mother"s Day</a>
+                        </td>
+                        <td class="td">May 12, 2024</td>
+                        <td class="td">300 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/memorial-day/">Memorial Day</a></td>
+                        <td class="td">May 27, 2024</td>
+                        <td class="td">315 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/fathers-day/">Father's Day</a></td>
+                        <td class="td">Jun 16, 2024</td>
+                        <td class="td">335 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/juneteenth/">Juneteenth</a></td>
+                        <td class="td">Jun 19, 2024</td>
+                        <td class="td">338 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/independence-day/">Independence Day</a></td>
+                        <td class="td">Jul 4, 2024</td>
+                        <td class="td">353 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/labor-day/">Labor Day</a></td>
+                        <td class="td">Sep 4, 2023</td>
+                        <td class="td">49 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/columbus-day/">Columbus Day</a></td>
+                        <td class="td">Oct 9, 2023</td>
+                        <td class="td">84 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/halloween/">Halloween</a></td>
+                        <td class="td">Oct 31, 2023</td>
+                        <td class="td">106 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/veterans-day/">Veterans Day</a></td>
+                        <td class="td">Nov 11, 2023</td>
+                        <td class="td">117 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/thanksgiving-day/">Thanksgiving Day</a></td>
+                        <td class="td">Nov 23, 2023</td>
+                        <td class="td">129 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/black-friday/">Black Friday</a></td>
+                        <td class="td">Nov 24, 2023</td>
+                        <td class="td">130 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/cyber-monday/">Cyber Monday</a></td>
+                        <td class="td">Nov 27, 2023</td>
+                        <td class="td">133 days</td>
+                    </tr>
+                    <tr>
+                        <td class="td"><a href="/timer/christmas-day/">Christmas</a></td>
+                        <td class="td">Dec 25, 2023</td>
+                        <td class="td">161 days</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="usage">
+                <p class="usagetext"></p>
+            </div>
+        </div>
+        <div class="empty"></div>
+
+    </div>
+
+    <div class="modal-overlay" id="timerModal">
+        <div class="modal">
+            <label for="title" class="Title">Title:</label>
+            <input type="text" id="title" placeholder="Enter title" class="placeholdertext">
+            <label for="hours" class="hours">Hours:</label>
+            <input type="number" id="hours" min="0" max="23" value="0">
+            <label for="minutes" class="minutes">Minute:</label>
+            <input type="number" id="minutes" min="0" max="59" value="0">
+            <label for="seconds" class="seconds">Second:</label>
+            <input type="number" id="seconds" min="0" max="59" value="0">
+
+
+            <button onclick="startTimer()" class="startbutton">Start</button>
+            <button onclick="closeTimerPrompt()" class="cancelbutton">Cancel</button>
+        </div>
+    </div>
+    <audio id="timerSound">
+        <source src="clock-alarm-8761.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="loader" class="loader-overlay">
+        <div class="loader-content">WAIT FOR IT!!!</div>
+    </div>
+
+</body>
+
+<script>
+
+    function hideLoader() {
+        const loader = document.getElementById("loader");
+        loader.style.display = "none";
+    }
+
+    const loader = document.getElementById("loader");
+    loader.style.display = "flex";
+
+    window.addEventListener("load", function () {
+        setTimeout(hideLoader, 2000);
+    });
+
+
+
+
+    let timerInterval;
+    let totalTime;
+    let remainingTime;
+    let isTimerRunning = false;
+    const onemin = document.getElementById("onemin");
+    onemin.addEventListener("click", oneminTimer);
+    const fivemin = document.getElementById("fivemin");
+    fivemin.addEventListener("click", fiveminTimer);
+    const tenmin = document.getElementById("tenmin");
+    tenmin.addEventListener("click", tenminTimer);
+    const fifteenmin = document.getElementById("fifteenmin");
+    fifteenmin.addEventListener("click", fifteenminTimer);
+    const onesecond = document.getElementById("onesecond");
+    onesecond.addEventListener("click", onesecondTimer);
+    const fivesecond = document.getElementById("fivesecond");
+    fivesecond.addEventListener("click", fivesecondTimer);
+    const tensecond = document.getElementById("tensecond");
+    tensecond.addEventListener("click", tensecondTimer);
+    const fifteensecond = document.getElementById("fifteensecond");
+    fifteensecond.addEventListener("click", fifteensecondTimer);
+    const onehour = document.getElementById("onehour");
+    onehour.addEventListener("click", onehourTimer);
+    const fivehour = document.getElementById("fivehour");
+    fivehour.addEventListener("click", fivehourTimer);
+    const tenhour = document.getElementById("tenhour");
+    tenhour.addEventListener("click", tenhourTimer);
+    const fifteenhour = document.getElementById("fifteenhour");
+    fifteenhour.addEventListener("click", fifteenhourTimer);
+
+    function openTimerPrompt() {
+        const modal = document.getElementById("timerModal");
+        modal.style.display = "block";
+    }
+
+    function closeTimerPrompt() {
+        const modal = document.getElementById("timerModal");
+        modal.style.display = "none";
+    }
+    function oneminTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 1 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fiveminTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 5 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function tenminTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 10 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fifteenminTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 15 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function onesecondTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 0 * 60 + 1) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fivesecondTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 0 * 60 + 5) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function tensecondTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 0 * 60 + 10) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fifteensecondTimer() {
+        isTimerRunning = false;
+        totalTime = (0 * 3600 + 0 * 60 + 15) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function onehourTimer() {
+        isTimerRunning = false;
+        totalTime = (1 * 3600 + 0 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fivehourTimer() {
+        isTimerRunning = false;
+        totalTime = (5 * 3600 + 0 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function tenhourTimer() {
+        isTimerRunning = false;
+        totalTime = (10 * 3600 + 0 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function fifteenhourTimer() {
+        isTimerRunning = false;
+        totalTime = (15 * 3600 + 0 * 60 + 0) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    function startTimer() {
+        const title = document.getElementById("title").value;
+        const hours = parseInt(document.getElementById("hours").value);
+        const minutes = parseInt(document.getElementById("minutes").value);
+        const seconds = parseInt(document.getElementById("seconds").value);
+
+        if (isNaN(hours) || isNaN(minutes) || isNaN(seconds)) {
+            alert("Invalid input. Please enter valid numbers.");
+            return;
+        }
+
+        totalTime = (hours * 3600 + minutes * 60 + seconds) * 1000;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+
+        timerInterval = setInterval(updateTimer, 1000);
+        isTimerRunning = true;
+
+        closeTimerPrompt();
+    }
+
+    function stopTimer() {
+        clearInterval(timerInterval);
+        isTimerRunning = false;
+    }
+
+    function resetTimer() {
+        isTimerRunning = false;
+        totalTime = 0;
+        remainingTime = totalTime;
+        updateTimerDisplay();
+        alert("Timer has been reset.");
+
+    }
+
+    function updateTimer() {
+        remainingTime -= 1000;
+
+        if (remainingTime <= 0) {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            remainingTime = 0;
+
+            const timerSound = document.getElementById("timerSound");
+            timerSound.play();
+
+
+        }
+
+        updateTimerDisplay();
+    }
+
+    function updateTimerDisplay() {
+        const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+        const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        const timerDisplay = document.querySelector(".settimer");
+        timerDisplay.textContent = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+    }
+
+    function formatTime(time) {
+        return time.toString().padStart(2, "0");
+    }
+
+    const setTimerButton = document.querySelector(".settimertext");
+    setTimerButton.addEventListener("click", openTimerPrompt);
+
+    const stopButton = document.getElementById("stop");
+    stopButton.addEventListener("click", stopTimer);
+
+    const resetButton = document.getElementById("reset");
+    resetButton.addEventListener("click", resetTimer);
+</script>
+
+</html>

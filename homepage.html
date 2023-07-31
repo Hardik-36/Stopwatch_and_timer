@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  
+
+  .navbar {
+    width: 100%;
+    height: 15vh;
+    background-color: #5c8d31; 
+    padding: 0 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar a {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 1.5rem;
+    margin-left: 2rem;
+    padding: 1rem 2rem;
+    display: inline-block;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+  }
+
+  .navbar a:hover {
+    background-color: #315c8d;
+  }
+
+  .container {
+    text-align: center;
+    margin-top: 20vh;
+  }
+
+  .headline {
+    text-align: center;
+  }
+
+  .top-text {
+    font-size: 4rem;
+    font-weight: bold;
+    color: #44318d; 
+    margin-bottom: 1rem;
+  }
+
+  .bottom-text {
+    font-size: 2rem;
+    color: #88b71c; 
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeInAnimation 1s ease-in forwards;
+  }
+
+  @keyframes fadeInAnimation {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-in-left {
+    transform: translateX(-100%);
+    animation: slideInLeftAnimation 1s ease-in-out forwards;
+  }
+
+  @keyframes slideInLeftAnimation {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+  }
+
+</style>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="stopwatch.html" class="slide-in-left">Stopwatch</a>
+    <a href="timer.html" class="slide-in-left">Timer</a>
+    <a href="alarm.html" class="slide-in-left">Alarm</a>
+  </div>
+  <div class="container">
+    <div class="headline fade-in">
+      <div class="top-text">Welcome to our Timer and Stopwatch Website</div>
+      <div class="bottom-text">Stay productive and organized with our reliable timer and stopwatch tools.</div>
+    </div>
+  </div>
+</body>
+</html>

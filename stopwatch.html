@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopwatch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 15vh;
+      background-color: #5c8d31;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-content {
+      width: 80%;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .nav-button {
+      padding: 1rem 2rem;
+      font-size: 1.5rem;
+      background-color: transparent;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .nav-button:hover {
+      background-color: #315c8d;
+    }
+
+    .container {
+      position: relative;
+      height: 80vh;
+    }
+
+    .stopwatch {
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .time {
+      font-size: 6.5vw;
+    }
+
+    .buttonsbox {
+      margin-top: 2rem;
+    }
+
+    .button {
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      border-radius: 0.5rem;
+      background-color: #5c8d31;
+      color: #FFF;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+      margin-right: 2rem;
+    }
+
+    .button:last-child {
+      margin-right: 0;
+    }
+
+    .button:hover {
+      background-color: #4b7426;
+      transform: scale(1.05);
+    }
+
+    .link {
+      width: 100%;
+      height: 100%;
+      top: 0;
+      text-decoration: none;
+      color: white;
+    }
+
+    .timerlink {
+      text-decoration: none;
+    }
+
+    .clock {
+      background: transparent;
+      border: 0.5vw solid black;
+      border-radius: 50%;
+      width: 6vw;
+      height: 12vh;
+      margin-top: 0.3vh;
+      position: absolute;
+      margin-left: 1.5vw;
+    }
+
+    .hourhand {
+      background: transparent;
+      border: 0.3vw solid black;
+      color: transparent;
+      border-top: 0;
+      border-left: 0;
+      border-bottom: 0;
+      height: 7vh;
+      position: absolute;
+      margin-left: 2.6vw;
+      margin-top: 0;
+    }
+
+    .minhand {
+      background: transparent;
+      border: 0.3vw solid black;
+      color: transparent;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      width: 3.9vw;
+      position: absolute;
+      margin-top: 3.6vh;
+      margin-left: 2.6vw;
+    }
+
+    .loader-overlay {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+    }
+
+    .loader-content {
+      color: white;
+      font-size: 2vw;
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="navbar-content">
+      <button class="nav-button"><a href="alarm.html" class="timerlink">
+          <span class="link">Alarm</span>
+        </a></button>
+      <button class="nav-button"><a href="timer.html" class="timerlink">
+          <span class="link">Timer</span>
+        </a></button>
+      <button class="nav-button">Stopwatch</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="stopwatch">
+      <div class="time" id="time">00:00:00</div>
+      <div class="buttonsbox">
+        <button class="button" id="start">Start</button>
+        <button class="button" id="stop">Stop</button>
+        <button class="button" id="reset">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div id="loader" class="loader-overlay">
+    <div class="loader-content">WAIT FOR IT!!!</div>
+  </div>
+
+  <script>
+    function hideLoader() {
+      const loader = document.getElementById("loader");
+      loader.style.display = "none";
+    }
+
+    const loader = document.getElementById("loader");
+    loader.style.display = "flex";
+
+    window.addEventListener("load", function () {
+      setTimeout(hideLoader, 2000);
+    });
+
+    var startTime = 0;
+    var pausedTime = 0;
+    var isRunning = false;
+
+    function start() {
+      if (!isRunning) {
+        isRunning = true;
+        startTime = Date.now() - pausedTime;
+        requestAnimationFrame(updateTime);
+      }
+    }
+
+    function stop() {
+      if (isRunning) {
+        isRunning = false;
+        pausedTime = Date.now() - startTime;
+      }
+    }
+
+    function reset() {
+      isRunning = false;
+      startTime = 0;
+      pausedTime = 0;
+      document.getElementById("time").innerHTML = formatTime(0);
+    }
+
+    function formatTime(time) {
+      var hours = Math.floor(time / 3600000);
+      var minutes = Math.floor((time % 3600000) / 60000);
+      var seconds = Math.floor((time % 60000) / 1000);
+      var milliseconds = Math.floor((time % 1000) / 10);
+
+      return (
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(seconds).padStart(2, "0") +
+        "." +
+        String(milliseconds).padStart(2, "0")
+      );
+    }
+
+    function updateTime() {
+      if (isRunning) {
+        var currentTime = Date.now() - startTime;
+        document.getElementById("time").innerHTML = formatTime(currentTime);
+        requestAnimationFrame(updateTime);
+      }
+    }
+
+    document.getElementById("start").onclick = start;
+    document.getElementById("stop").onclick = stop;
+    document.getElementById("reset").onclick = reset;
+  </script>
+</body>
+
+</html>
